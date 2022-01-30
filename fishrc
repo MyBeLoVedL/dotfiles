@@ -1,3 +1,17 @@
+
+## set environment
+if uname -a | rg -i Darwin > /dev/null
+	set env 'apple'
+else if uname -a | rg -i  'Debian' > /dev/null
+	set env 'deb'
+else if uname -a | rg -i  'Ubuntu' > /dev/null
+	set env 'ubu'
+else if uname -a | rg -i  'Arch' > /dev/null
+	set env 'arch'
+end
+
+
+
 ###  ALIAS ###
 
 alias cls='clear'
@@ -29,16 +43,26 @@ alias py='python3 '
 alias cl='clang -std=c11 -Wall '
 alias j="autojump "
 
-if uname -a | rg -i Darwin > /dev/null
-	alias appin="brew install"
-	alias appup="brew update;and brew upgrade"
-	alias appls="brew list"
-else if  uname -a | rg -i "Debian|Ubuntu"
-	alias appin="sudo apt install"
-	alias appup="sudo apt update;and sudo apt upgrade"
-	alias appls="sudo apt list"
-end
 
+switch $env
+	case apple
+		alias appin="brew install"
+		alias appup="brew update;and brew upgrade"
+		alias appls="brew list"
+	case deb ubu
+		alias appin="sudo apt install"
+		alias appup="sudo apt update;and sudo apt upgrade"
+		alias appls="sudo apt list"
+	case arch
+		alias appin="sudo pacman -S"
+		alias appup="sudo pacman -Syyu"
+end
+		
+		
+
+if uname -a | rg -i Darwin > /dev/null
+else if  uname -a | rg -i "Debian|Ubuntu"
+end
 
 
 alias gr="go run"
@@ -78,7 +102,27 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p' "
 
 
 function setup
-	appin rg fd bat sd exa
+	switch $env
+		case apple arch
+			appin rg fd bat sd & 
+		case ubu
+			appin ripgrep fd-find
+	end
+			
+
+	if ! test -d ~/Repo
+		mkdir ~/Repo
+	end 
+	cd ~/Repo
+	git clone https://github.com/MyBeLoVedL/dotfiles.git
+	cd dotfiles
+	ln -s fishrc ~/.fishrc
+	ln -s fishrc ~/.config/fish/config.fish
+	ln -s vimrc ~/.vimrc
+
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
 end
 	
 
