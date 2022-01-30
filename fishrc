@@ -108,10 +108,11 @@ function setup
 
 	ln -sf fishrc ~/.fishrc
 	ln -sf fishrc ~/.config/fish/config.fish
+	ln -sf vimrc ~/.vimrc
 
-	if ! test -e ~/.vimrc
-		ln -s vimrc ~/.vimrc
-	end 
+	if ! test -d /.vim/autoload
+		mkdir -p /.vim/autoload
+	end
 
 	cp assets/plug.vim ~/.vim/autoload/
 end
