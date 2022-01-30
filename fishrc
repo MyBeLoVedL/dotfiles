@@ -60,10 +60,6 @@ end
 		
 		
 
-if uname -a | rg -i Darwin > /dev/null
-else if  uname -a | rg -i "Debian|Ubuntu"
-end
-
 
 alias gr="go run"
 alias gb="go build" 
@@ -110,20 +106,14 @@ function setup
 	end
 			
 
-	if ! test -d ~/Repo
-		mkdir ~/Repo
-	end 
-	cd ~/Repo
-	git clone https://github.com/MyBeLoVedL/dotfiles.git
-	cd dotfiles
-	if ! test -e ~/.fishrc
-		ln -s fishrc ~/.fishrc
-	end 
+	ln -sf fishrc ~/.fishrc
+	ln -sf fishrc ~/.config/fish/config.fish
+
 	if ! test -e ~/.vimrc
 		ln -s vimrc ~/.vimrc
 	end 
 
-	cp plug.vim ~/.vim/autoload/
+	cp assets/plug.vim ~/.vim/autoload/
 end
 	
 
@@ -147,6 +137,3 @@ set GOPATH ~/go
 set -x PATH $PATH /usr/local/go/bin
 set -x PATH $PATH $GOPATH/bin
 
-
-[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
-[ -f "$HOME/.bytebm/config/fish.sh" ]; and source "$HOME/.bytebm/config/fish.sh"
