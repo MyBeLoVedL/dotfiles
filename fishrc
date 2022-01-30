@@ -116,13 +116,14 @@ function setup
 	cd ~/Repo
 	git clone https://github.com/MyBeLoVedL/dotfiles.git
 	cd dotfiles
-	ln -s fishrc ~/.fishrc
-	ln -s fishrc ~/.config/fish/config.fish
-	ln -s vimrc ~/.vimrc
+	if ! test -e ~/.fishrc
+		ln -s fishrc ~/.fishrc
+	end 
+	if ! test -e ~/.vimrc
+		ln -s vimrc ~/.vimrc
+	end 
 
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-
+	cp plug.vim ~/.vim/autoload/
 end
 	
 
