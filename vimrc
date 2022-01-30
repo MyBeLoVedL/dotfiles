@@ -11,7 +11,7 @@ set ignorecase
 set smartcase
 
 
-# set cursor shape
+" set cursor shape
 let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)

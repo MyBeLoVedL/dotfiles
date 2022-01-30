@@ -110,8 +110,8 @@ function setup
 	ln -sf fishrc ~/.config/fish/config.fish
 	ln -sf vimrc ~/.vimrc
 
-	if ! test -d /.vim/autoload
-		mkdir -p /.vim/autoload
+	if ! test -d ~/.vim/autoload
+		mkdir -p ~/.vim/autoload
 	end
 
 	cp assets/plug.vim ~/.vim/autoload/
@@ -137,4 +137,10 @@ set GOROOT /usr/local/go
 set GOPATH ~/go
 set -x PATH $PATH /usr/local/go/bin
 set -x PATH $PATH $GOPATH/bin
+
+
+function fish_prompt
+	echo '~> '
+end
+
 
