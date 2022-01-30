@@ -78,7 +78,7 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p' "
 
 
 function setup
-	appin rg fd bat sd
+	appin rg fd bat sd exa
 end
 	
 
